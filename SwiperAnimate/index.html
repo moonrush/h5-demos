@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Swiper animate demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- animate.min.css 使用前需要带有prefix -->
+    <!-- <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+
+</head>
+
+<body>
+    <!-- Swiper 区域 -->
+    <div class="swiper-container">
+        <!-- 标题区域 -->
+        <div class="swiper-title">
+            SWIPER ANIMATE SHOW PAGE
+        </div>
+
+        <!-- Slide 显示区域 -->
+        <div class="swiper-wrapper"></div>
+        
+        <!-- Pagination 分页器区域 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 选项区域 -->
+        <div class="swiper-choice">
+            <select class="swiper-selector"></select>
+        </div>
+    </div>
+
+    <!-- 引入 JS -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.js"></script>
+    <script src="assets/swiper.animate.min.js"></script>
+
+    <script>
+        // 构建 Dom
+        const effects = ['bounce','flash','pulse','rubberBand','shakeX','shakeY','headShake','swing','tada','wobble','jello','heartBeat','backInDown','backInLeft','backInRight','backInUp','backOutDown','backOutLeft','backOutRight','backOutUp','bounceIn','bounceInDown','bounceInLeft','bounceInRight','bounceInUp','bounceOut','bounceOutDown','bounceOutLeft','bounceOutRight','bounceOutUp','fadeIn','fadeInDown','fadeInDownBig','fadeInLeft','fadeInLeftBig','fadeInRight','fadeInRightBig','fadeInUp','fadeInUpBig','fadeInTopLeft','fadeInTopRight','fadeInBottomLeft','fadeInBottomRight','fadeOut','fadeOutDown','fadeOutDownBig','fadeOutLeft','fadeOutLeftBig','fadeOutRight','fadeOutRightBig','fadeOutUp','fadeOutUpBig','fadeOutTopLeft','fadeOutTopRight','fadeOutBottomRight','fadeOutBottomLeft','flip','flipInX','flipInY','flipOutX','flipOutY','lightSpeedInRight','lightSpeedInLeft','lightSpeedOutRight','lightSpeedOutLeft','rotateIn','rotateInDownLeft','rotateInDownRight','rotateInUpLeft','rotateInUpRight','rotateOut','rotateOutDownLeft','rotateOutDownRight','rotateOutUpLeft','rotateOutUpRight','hinge','jackInTheBox','rollIn','rollOut','zoomIn','zoomInDown','zoomInLeft','zoomInRight','zoomInUp','zoomOut','zoomOutDown','zoomOutLeft','zoomOutRight','zoomOutUp','slideInDown','slideInLeft','slideInRight','slideInUp','slideOutDown','slideOutLeft','slideOutRight','slideOutUp']
+
+        const randRGB = () => { return Math.round(Math.random() * 200) }
+        const randRGBbg = () => { return Math.round(Math.random() * 55) + 200 }
+
+        const swiperWrapper = document.querySelector('.swiper-wrapper')
+        const swiperSelector = document.querySelector('.swiper-selector')
+
+        effects.forEach(val => {
+            let swEl = document.createElement('div')
+            swEl.className = 'swiper-slide'
+            swEl.style.backgroundColor = `rgb(${randRGBbg()},${randRGBbg()},${randRGBbg()})`
+            swEl.innerHTML = `<p class="ani" swiper-animate-effect="${val}" swiper-animate-duration="1s"
+                    swiper-animate-delay="0.3s" style="color:rgb(${randRGB()},${randRGB()},${randRGB()});">${val}</p>`
+
+            let opEl = document.createElement('option')
+            opEl.value = effects.indexOf(val)
+            opEl.innerText = val
+
+
+            swiperWrapper.append(swEl)
+            swiperSelector.append(opEl)
+        })
+
+        //初始化swiper
+        const swiper = new Swiper('.swiper-container', {
+            direction: 'vertical',
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'fraction',
+                clickable: true,
+            },
+            on: {
+                init: function () {
+                    swiperAnimateCache(this); //隐藏动画元素 
+                    this.emit('slideChangeTransitionEnd');//在初始化时触发一次slideChangeTransitionEnd事件
+                },
+                slideChangeTransitionEnd: function () {
+                    swiperAnimate(this); //每个slide切换结束时运行当前slide动画
+                    swiperSelector.querySelectorAll('option')[this.activeIndex].selected = true // 当动画完成时更新selector                    
+                }
+            }
+        });
+
+        swiperSelector.addEventListener('change', () => {
+            swiper.slideTo(swiperSelector.selectedIndex)
+        })
+    </script>
+</body>
+
+</html>
