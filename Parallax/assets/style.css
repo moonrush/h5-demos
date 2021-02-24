@@ -1,0 +1,111 @@
+/**
+* 全屏通用 RESET 部分
+*/
+
+html, body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+/**
+* 本例独用
+*/
+
+.parallax-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    /* text-align: center; */
+    align-items: center;
+    justify-content: center;
+    display: none;
+    background: #f2f2f2;
+    color: #333;
+    font-size: 32px;
+}
+
+.swiper-title {
+    top: 20px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    -webkit-transition: .3s opacity;
+    -o-transition: .3s opacity;
+    transition: .3s opacity;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    z-index: 10;
+}
+
+.title {
+    text-shadow: 0px 5px 5px #999;
+    position: absolute;
+    text-align: center;
+    left: 0;
+    top: 25%;
+    width: 100%;
+}
+
+.title h3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f4645f;
+}
+
+.map {
+    position: absolute;
+    left: 0;
+    top: 50%
+}
+
+.map img {
+    box-shadow: 0px 5px 5px #999;
+    width: 50%;
+    border-radius: 50%;
+    border: 5px double #ccc;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="screen-orientation" content="portrait">
+    <title>Parallax demo</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.compat.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <!-- 提示请横屏观看 蒙版 -->
+    <div class="mask">
+        请横屏观看
+    </div>
+
+    <div class="swiper-container">
+        <div class="swiper-title">
+            SWIPER PARALLAX SHOW PAGE
+        </div>
+
+        <div class="parallax-bg" data-swiper-parallax="-100%">
+            <img class="bg" src="assets/bg.jpg" width="100%" />
+        </div>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <div class="title" data-swiper-parallax="-1000">
+                    <h3>长江经济带区域</h3>
+                    <p>审图号：GS(2016)605号</p>
+                </div>
+                <div class="map" data-swiper-parallax="-100">
+                    <img src="assets/map1.jpg" alt="长江经济带区域">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="title" data-swiper-parallax="-1000">
+                    <h3>京津冀都市圈</h3>
+                    <p>审图号：GS(2016)1610号</p>
+                </div>
+                <div class="map" data-swiper-parallax="-100">
+                    <img src="assets/map2.jpg" alt="京津冀都市圈">
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <div class="title" data-swiper-parallax="-1000">
+                    <h3>粤港澳大湾区</h3>
+                    <p>审图号：GS(2019)4342号</p>
+                </div>
+                <div class="map" data-swiper-parallax="-100">
+                    <img src="assets/map3.jpg" alt="粤港澳大湾区">
+                </div>
+            </div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.js"></script>
+    <script>
+        const parallaxBg = document.querySelector('.bg')
+
+        // animate动画执行方法
+        const animateCSS = (element, animation, prefix = '') =>
+            new Promise((resolve, reject) => {
+                const animationName = `${prefix}${animation}`;
+                const node = element.nodeType == 1 ? element : document.querySelector(element);
+
+                node.classList.add(`${prefix}animated`, animationName);
+
+                function handleAnimationEnd(event) {
+                    event.stopPropagation();
+                    node.classList.remove(`${prefix}animated`, animationName);
+                    resolve('Animation ended');
+                }
+
+                node.addEventListener('animationend', handleAnimationEnd, { once: true });
+            });
+
+        // 图片点击事件
+        document.querySelectorAll('img').forEach(el => {
+            el.addEventListener('click', function () { animateCSS(this, 'heartBeat') })
+        })
+
+        // 检测竖屏状态
+        const isVertical = () => {
+            return window.orientation % 180 === 0
+        }
+
+        // 计算移动的位移
+        const setParallax = () => {
+            const mask = document.querySelector('.mask')
+
+            // 如果是横屏则蒙版
+            if (!isVertical()) {
+                mask.style.display = 'flex'
+                return
+            }
+            // 计算滚动百分比
+            mask.style.display = 'none'
+            let pt = (parallaxBg.height - window.innerHeight) / window.innerHeight * 100
+            document.querySelector('.parallax-bg').setAttribute('data-swiper-parallax', `-${pt}%`)
+        }     
+
+        // 图片加载后 & resize事件
+        parallaxBg.onload = setParallax
+        window.addEventListener('resize', setParallax)
+
+        // 初始化swiper
+        var swiper = new Swiper('.swiper-container', {
+            speed: 600,
+            parallax: true,
+            direction: 'vertical',
+            pagination: {
+                el: '.swiper-pagination',
+                type: 'progressbar',
+            },
+        });
+    </script>
+
+</body>
+
+</html>
