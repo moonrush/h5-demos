@@ -15,9 +15,9 @@
 </head>
 
 <body>
-    <!-- 提示请横屏观看 蒙版 -->
+    <!-- 提示请竖屏观看 蒙版 -->
     <div class="mask">
-        请横屏观看
+        请竖屏观看
     </div>
 
     <div class="swiper-container">
@@ -60,6 +60,10 @@
         </div>
 
         <div class="swiper-pagination"></div>
+
+        <div class="swiper-author">
+            Develop By Nora7aki
+        </div>
     </div>
 
     <script src="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.js"></script>
@@ -106,7 +110,7 @@
             mask.style.display = 'none'
             let pt = (parallaxBg.height - window.innerHeight) / window.innerHeight * 100
             document.querySelector('.parallax-bg').setAttribute('data-swiper-parallax', `-${pt}%`)
-        }     
+        }
 
         // 图片加载后 & resize事件
         parallaxBg.onload = setParallax

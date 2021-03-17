@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Shot Demo</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/style.css">
+
+</head>
+
+<body onload="init()">
+    <div class="container">
+        <div class="title">
+            SCREEN SHOT DEMO
+        </div>
+
+        <div class="wrapper">
+            <div class="sentence1">
+                ずっと何かを 、 誰かをさがしている
+            </div>
+            <div class="sentence2">
+                そういう気持ちに捕り凭かれたのは、たぶん、あの日から
+            </div>
+            <img src="./assets/bg.png" alt="cat" width="" />
+        </div>
+
+        <div class="btn">
+            <button onclick="screenClip()">生成图片</button>
+        </div>
+    </div>
+    <div class="shot"><img /></div>
+
+    <script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        const animateCSS = (element, animation, prefix = 'animate__') =>
+            new Promise((resolve, reject) => {
+                const animationName = `${prefix}${animation}`;
+                const node = document.querySelector(element);
+
+                node.classList.add(`${prefix}animated`, animationName);
+
+                function handleAnimationEnd(event) {
+                    event.stopPropagation();
+                    node.classList.remove(`${prefix}animated`, animationName);
+                    resolve('Animation ended');
+                }
+
+                node.addEventListener('animationend', handleAnimationEnd, { once: true });
+            })
+
+
+        const closeKaCha = function () {
+            this.style.background = 'initial'
+            this.style.display = 'none'
+            this.querySelector('img').style.display = 'none'
+        }
+
+        const screenKaCha = (selector) => {
+            let el = document.querySelector(selector)
+            el.style.display = 'flex'
+            animateCSS(selector, 'kaCha')
+                .then(() => {
+                    el.style.background = 'rgba(255,255,255,0.4)'
+                    animateCSS(`${selector} img`, 'fadeIn')
+                })
+                .then(() => {
+                    el.querySelector(`img`).style.display = 'block'
+                    el.addEventListener('click', closeKaCha.bind(el), { once: true })
+                })
+        }
+
+        const screenClip = () => {
+            html2canvas(document.querySelector('.wrapper'), { scale: 1, logging: false, useCORS: true }).
+                then(function (canvas) {
+                    let dataUrl = canvas.toDataURL();
+                    let img = document.querySelector('.shot img')
+                    img.src = dataUrl
+
+                    screenKaCha('.shot')
+                })
+        }
+
+        const init = () => {
+            let s2 = document.querySelector('.sentence2')
+
+            s2.style.display = 'none'
+
+            animateCSS('.sentence1', 'fadeInDown')
+                .then(() => {
+                    s2.style.display = 'block'
+                    animateCSS('.sentence2', 'fadeInDown')
+                })
+        }
+    </script>
+</body>
+
+</html>

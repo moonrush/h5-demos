@@ -1,0 +1,149 @@
+/**
+* 全屏通用 RESET 部分
+*/
+
+html, body {
+    position: relative;
+    height: 100%;
+}
+
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/**
+* 本例独用
+*/
+
+.title {
+    top: 20px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+    color: #fff;
+}
+
+.sentence1, .sentence2 {
+    width: 16px;
+    font-size: 16px;
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+    color: #fff;
+}
+
+.sentence1 {
+    top: 100px;
+    right: 20px;
+}
+
+.sentence2 {
+    top: 150px;
+    right: 50px;
+}
+
+.wrapper {
+    overflow: hidden;
+}
+
+.wrapper img {
+    height: 100%;
+}
+
+.btn {
+    bottom: 60px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+}
+
+.btn button {
+    border: 0;
+    background: rgb(93, 56, 88);
+    color: #fff;
+    font-weight: bold;
+    /* margin: 0 20rem; */
+    width: 10rem;
+    height: 3rem;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+}
+
+.shot {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: none;
+    color: #fff;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 24px;
+}
+
+.shot img {
+    width: 90%;
+    box-shadow: 0px 5px 10px #eee;
+    display: none;
+    margin: 0 auto;
+    border: 10px solid #fff;
+    box-sizing: border-box;
+}
+
+@-webkit-keyframes kaCha {
+    0% {
+        background: initial;
+    }
+    25% {
+        background: rgba(255, 255, 255, 1);
+    }
+    75% {
+        background: rgba(255, 255, 255, 1);
+    }
+    100% {
+        background: rgba(255, 255, 255, 0.4);
+    }
+}
+
+@keyframes kaCha {
+    0% {
+        background: initial;
+    }
+    25% {
+        background: rgba(255, 255, 255, 1);
+    }
+    75% {
+        background: rgba(255, 255, 255, 1);
+    }
+    100% {
+        background: rgba(255, 255, 255, 0.4);
+    }
+}
+
+.animate__animated.animate__kaCha {
+    -webkit-animation-name: kaCha;
+    animation-name: kaCha;
+    -webkit-animation-duration: calc(1s * 0.25);
+    animation-duration: calc(1s * 0.25);
+}

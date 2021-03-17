@@ -5,6 +5,7 @@
 **目录**
 [SwiperAnimate](#swiperanimate)
 [Parallax](#parallax)
+[ScreenShot](#screenshot)
 
 <h2 id="swiperanimate">SwiperAnimate</h2>
 
@@ -18,3 +19,10 @@
 基于 swiper.js(6.4.14) ，通过设置 `parallax` 属性等，实现效果
 
 [Parallax 实现说明](https://blog.csdn.net/u011974819/article/details/114007925)
+
+
+<h2 id="screenshot">咔嚓分享图片 ScreenShot</h2>
+
+基于 html2canvas 和 Animate.css，通过自定义 animation 方法，实现效果
+
+[ScreenShot 实现说明](https://blog.csdn.net/u011974819/article/details/114916031)

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Image demo</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/Swiper/6.4.14/swiper-bundle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+    <div class="swiper-container">
+        <div class="swiper-title">
+            SHARE IMAGE SHOW PAGE
+        </div>
+
+        <!-- Slide 显示区域 -->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                这是由DOM结构直接生成的图片
+            </div>
+        </div>
+    </div>
+    <div class="that"></div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+    <script>
+        html2canvas(document.querySelector('.swiper-container'), { scale: 1, logging: false, useCORS: true }).
+            then(function (canvas) {
+                let dataUrl = canvas.toDataURL();
+                console.log(dataUrl)
+
+                let img = new Image()
+                img.src = dataUrl
+                img.style.width = '100%'
+                img.style.height = '100%'
+                // img.classList.add('show')
+
+                document.querySelector('.that').append(img)
+            })
+    </script>
+</body>
+
+</html>
